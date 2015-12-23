@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script>
+
+        $(function () {
+            $('div').html(function (index, data) {
+                console.log(index, data);
+                return index + ' : ' + data;
+            }); // .css, .attr, ...
+
+            console.log($('div').eq(0).attr('class', 'myclass2'));
+
+            $('div').attr('class', function (index, data) {
+                console.log(index, data);
+                return data + index;
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="mydiv">Div X</div>
+    <div class="mydiv">Div Y</div>
+    <div class="mydiv">Div Z</div>
+
+</body>
+</html>

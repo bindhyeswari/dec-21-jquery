@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script>
+
+        // http://api.jquery.com/on/
+
+        $(function () {
+            $('button').on('click mouseenter', function (event) {
+                console.log(event);
+            });
+
+            $('ul').on('click', 'li', {
+                info: 'some custom information ... '
+            }, function (event) {
+                console.log(event.data);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <button>Handle click</button>
+
+    <ul>
+        <li>James</li>
+        <li>Manali</li>
+    </ul>
+
+</body>
+</html>

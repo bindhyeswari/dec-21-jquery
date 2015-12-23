@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script>
+
+        $(function () {
+            $('li').each(function (index, element) {
+                console.log('The index is ', index, ' and the element is ', element);
+                console.log(this === element);
+                // IMPORTANT
+                $(this).html('change element data for li element ' + index);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <ul>
+        <li>James</li>
+        <li>Manali</li>
+    </ul>
+</body>
+</html>
