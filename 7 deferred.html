@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script>
+
+        $(function () {
+            var deferred = $.Deferred();
+
+            deferred.then(function (data) {
+                console.log(data);
+            }, function (error) {
+                console.log(error);
+            });
+
+            deferred.resolve('resolved data');
+        });
+
+        function createAjaxDeferred(url) {
+            var deferred = $.Deferred();
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', url);
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // console.log(xhr.responseText);
+                        deferred.resolve(xhr.responseText);
+                    } else {
+                        deferred.reject(xhr.responseText);
+                    }
+                }
+            });
+            xhr.send();
+            return deferred;
+        }
+
+        createAjaxDeferred('https://api.github.com/search/repositories?q=nodejs').then(
+                function (data) {
+                    console.log(JSON.parse(data));
+                },
+                function (xhr) {
+                    console.log('error', xhr);
+                }
+        );
+
+        var urls = ['https://api.github.com/search/repositories?q=nodejs',
+        'https://api.github.com/search/repositories?q=iot'];
+        var deferreds = urls.map(createAjaxDeferred);
+
+        $.when(deferreds[0], deferreds[1]).then(function (data1, data2) {
+            // console.log(data1, data2);
+            var args = Array.prototype.slice.call(arguments);
+            console.log(args.map(JSON.parse));
+        });
+
+        // todo: $.when DOES NOT take in array. Change code so that you can provide deferreds as
+        // an input vs deferredp[0], deferred[1]
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
